@@ -1,0 +1,22 @@
+{
+  "source": "ads",
+  "records": [
+    {
+      "email": "jane.doe@acme.com",
+      "name": "Jane Doe",
+      "company": "Acme Analytics",
+      "city": "Munich",
+      "campaign": "spring-retargeting"
+    },
+    {
+      "email": "info@zenith.io",
+      "name": "Zenith Robotics",
+      "company": "Zenith Robotics"
+    },
+    {
+      "email": "s.okafor@northwind.dev",
+      "name": "Samuel Okafor",
+      "phone": "(415) 555-0199"
+    }
+  ]
+}

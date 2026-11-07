@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lead-enrich"
+version = "1.0.0"
+description = "Deterministic lead de-duplication with provenance, conflict reporting and E.164 normalisation. Zero dependencies."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "aiplusplus360" }]
+keywords = ["crm", "deduplication", "entity-resolution", "enrichment", "e164", "data-quality"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Office/Business",
+  "Topic :: Text Processing :: General",
+]
+
+[project.scripts]
+leadenrich = "leadenrich.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/aiplusplus360/lead-enrich"
+
+[tool.setuptools]
+packages = ["leadenrich"]

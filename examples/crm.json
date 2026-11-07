@@ -1,0 +1,22 @@
+{
+  "source": "crm",
+  "records": [
+    {
+      "email": "Jane.Doe@Acme.com",
+      "name": "jane doe",
+      "phone": "(415) 555-0132",
+      "company": "Acme Analytics, Inc.",
+      "city": "Berlin"
+    },
+    {
+      "email": "info@zenith.io",
+      "name": "Zenith Robotics",
+      "company": "Zenith Robotics LLC"
+    },
+    {
+      "email": "sam@northwind.dev",
+      "name": "sam okafor",
+      "phone": "415-555-0199"
+    }
+  ]
+}

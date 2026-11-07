@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.9", "3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Byte-compile
+        run: python -m compileall -q leadenrich tests examples
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Doctest the package docstring
+        run: python -c "import doctest, leadenrich; r = doctest.testmod(leadenrich); assert r.failed == 0, r"
+      - name: Install
+        run: python -m pip install --quiet .
+      - name: Merge the example sources
+        run: python -m leadenrich merge examples/crm.json examples/ads.json --source-order crm,ads --region US --out merged.json
+      - name: Merge output is stable and correct
+        run: python scripts/check_merge.py merged.json
+      - name: Demo runs offline
+        run: python examples/demo.py
+      - name: Invalid input is reported, not dropped
+        shell: bash
+        run: |
+          echo '[{"email": "a@acme.com", "phone": "nonsense"}]' > bad.json
+          python -m leadenrich validate bad.json --json > bad-out.json
+          python -c "import json; d=json.load(open('bad-out.json')); assert d[0]['issues'] and d[0]['issues'][0]['field']=='phone'; assert d[0]['fields'].get('email')=='a@acme.com'"
